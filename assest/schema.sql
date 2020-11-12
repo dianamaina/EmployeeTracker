@@ -1,31 +1,31 @@
-DROP DATABASE IF EXISTS empolees_db
-CREATE database empolees_db;
+  
+DROP DATABASE IF EXISTS employee_tracker_db;
+CREATE DATABASE employee_tracker_db;
 
-USE empolees_db;
+USE employee_tracker_db;
 
-CREATE TABLE Department (
-  id INT NOT NULL,
-  name VARCHAR(30) NULL,
-  PRIMARY KEY (id),
+CREATE TABLE department (
+department_id INTEGER(3) NOT NULL PRIMARY KEY,
+department_name VARCHAR(30) NOT NULL -- Deparment Name
 );
 
-
-CREATE TABLE Role (
-  id  INT NOT NULL,
-  title VARCHAR(30) NULL,
-  salary decimal(10,4) NULL,
-  department_id INT NULL,
-
+CREATE TABLE role (
+role_id INTEGER(3) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+title VARCHAR(50) NOT NULL, -- Role Title
+salary DECIMAL(10,2), -- Role Salary
+department_id INTEGER(3), -- Holds reference to Department Role belongs to
+CONSTRAINT fk_department_id FOREIGN KEY (department_id) REFERENCES department(department_id)
+ON DELETE CASCADE ON UPDATE CASCADE
 );
-
 
 CREATE TABLE employee (
-  id INT NOT NULL,
-  first_name VARCHAR(30) NULL,
-  last_name VARCHAR(30) NULL,
-  role_id INT NULL,
-  manager_id INT not null,
-  
+id INTEGER(3) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+first_name VARCHAR(30) NOT NULL,
+last_name VARCHAR(30) NOT NULL,
+role_id INTEGER(3), -- Holds reference to Role Employee has
+CONSTRAINT fk_role_id FOREIGN KEY (role_id) REFERENCES role(role_id)
+ON DELETE CASCADE ON UPDATE CASCADE,
+manager_id INTEGER(3) DEFAULT null, -- Holds reference to another Employee that manages the Employee being created. May be null if this Employee has no Manager.
+CONSTRAINT fk_manager_id FOREIGN KEY (manager_id) REFERENCES employee(id)
+ON DELETE CASCADE ON UPDATE CASCADE
 );
-SELECT * FROM employees_db;
-
