@@ -125,7 +125,7 @@ function addRole() {
         {
             type: "input",
             name: "departmentId",
-            message: "Whats the department id?"
+            message: "What's the department id?"
         }
         //in the promise of inquirer add the department to the DB and the view all departments
     ]).then(function (data) {
