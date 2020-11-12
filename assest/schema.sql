@@ -1,5 +1,5 @@
   
-DROP DATABASE IF EXISTS employess_db;
+DROP DATABASE IF EXISTS employees_db;
 CREATE DATABASE employees_db;
 
 USE employees_db;
@@ -10,7 +10,7 @@ CREATE TABLE department(
   PRIMARY KEY (id)
 );
 
-CREATE TABLE role(
+CREATE TABLE roles(
     id INT NOT NULL,
     title VARCHAR(30),
     salary DECIMAL,
